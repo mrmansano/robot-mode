@@ -70,6 +70,18 @@
   (setq-local font-lock-defaults
     '(robot-mode-font-lock-keywords)))
 
+(defalias 'robot-parent-mode
+  (if (fboundp 'prog-mode) 'prog-mode 'fundamental-mode))
+
+;;;###autoload
+(define-derived-mode robot-mode robot-parent-mode "Robot Framework"
+  "Major mode for editing Robot Framework test files"
+  :group 'robot-mode
+
+  ;; Fonts
+  (set (make-local-variable 'font-lock-defaults) '(robot-mode-font-lock-keywords nil nil nil nil)))
+
+;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
 
 (provide 'robot-mode)
