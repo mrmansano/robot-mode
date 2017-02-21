@@ -64,12 +64,6 @@
     robot-mode-variable)
   "All available keywords")
 
-(define-derived-mode robot-mode fundamental-mode "Robot Framework"
-  "A major mode for Robot Framework."
-  (setq-local comment-start "# ")
-  (setq-local font-lock-defaults
-    '(robot-mode-font-lock-keywords)))
-
 (defalias 'robot-parent-mode
   (if (fboundp 'prog-mode) 'prog-mode 'fundamental-mode))
 
@@ -79,7 +73,8 @@
   :group 'robot-mode
 
   ;; Fonts
-  (set (make-local-variable 'font-lock-defaults) '(robot-mode-font-lock-keywords nil nil nil nil)))
+  (set (make-local-variable 'font-lock-defaults) '(robot-mode-font-lock-keywords nil nil nil nil))
+  (set (make-local-variable 'comment-start) "# "))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
